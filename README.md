@@ -1,57 +1,101 @@
-# LLAMASharp Unity Demo
+# 🎮 ScenePilot - AI-Powered Unity Scene Control 🚀
 
-This project serves as an example on how to integrate the [LLAMASharp library](https://github.com/SciSharp/LLamaSharp) into your Unity project.
+ScenePilot is a Unity-based system that allows developers to control their Unity scenes using **natural language commands** powered by **LLamaSharp (Local LLMs)**. With ScenePilot, you can ask an AI to:
+- 🎯 Highlight objects
+- 📷 Move & focus the camera
+- 🎮 Control scene objects dynamically
+- ✨ Easily add new AI-driven actions
 
-## Demo project overview
+## 🌟 Features
+✅ **Local AI (LLamaSharp)** – No external API required  
+✅ **Fast LLM Inference with CUDA GPU Acceleration**  
+✅ **Customizable AI Commands** – Expandable for more Unity actions  
+✅ **Supports Unity 2022+**  
 
-### Prerequisites to run
+---
 
-To run this project you need to download the `GGUF` model into `Assets/StreamingAssets` folder.
+## 🚀 Getting Started
 
-e.g. [LLAMA-7B GGUF](https://huggingface.co/TheBloke/llama-2-7B-Guanaco-QLoRA-GGUF)
+### 1️⃣ Clone the Repo
+```sh
+git clone https://github.com/YOUR_GITHUB_USERNAME/ScenePilot.git
+cd ScenePilot
+```
 
-Note: You only need single `.gguf` file. Files there usually differ by their quantization level, see details in the model's readme.
+### 2️⃣ Install Dependencies
+Make sure you have **Unity 2022.3+** installed and add **LLamaSharp** to your project:
 
-### Overview
+```sh
+dotnet add package LLamaSharp.Backend.Cuda12
+```
 
-This project contains a single scene at `Assets/Scenes/SampleScene.unity` with a simple chat UI.  
-Monobehaviour that has all the logic is named `LLamaSharpTestScript` and it's already added and set up in `Example` GameObject.
+### 3️⃣ Download the AI Model
+Place a compatible **GGUF** model in:
+```
+/Assets/StreamingAssets/LLM/llama-2-7b-chat.Q4_K_M.gguf
+```
+Get models from **[Hugging Face](https://huggingface.co/TheBloke/Llama-2-7B-GGUF)**.
 
-It generally follows LLAMASharp readme example and shows how to switch between different chat sessions.
+### 4️⃣ Run the Project
+1. Open the project in **Unity 2022.3+**.
+2. Press **Play**.
+3. Enter a command like:
+   ```
+   Highlight the Sphere
+   ```
+   And the AI will automatically control the scene!
 
-Before running the project you should point `LLamaSharpTestScript.ModelPath` from the inspector to your model path in `StreamingAssets`.
+---
 
-Additionally this project uses the following packages:
-- [UniTask](https://github.com/Cysharp/UniTask)  
-  For integrating async tasks with Unity and offloading blocking tasks to thread pool.
-- [NuGetForUnity](https://github.com/GlitchEnzo/NuGetForUnity)  
-  For fetching LLAMASharp and all it's dependencies from NuGet.
+## ⚙️ How It Works
+- The **UI** collects user input.
+- The **LLMManager** processes the prompt using a **local LLM**.
+- The **AICommandController** executes Unity actions based on AI output.
+- Uses **Cancellation Tokens** to allow stopping inference.
 
-## Setting up a project from scratch
+---
 
+## 🛠️ Project Structure
+```
+/Assets/Scripts
+  ├── LLM/
+  │   ├── LLMManager.cs  # Handles AI Inference
+  │   ├── AICommandController.cs  # Executes AI-generated commands
+  │   ├── CommandParser.cs  # Converts AI text into Unity actions
+  │
+  ├── UI/
+  │   ├── UIInputHandler.cs  # Manages UI input and loading spinner
+  │
+  ├── Utils/
+  │   ├── JsonUtils.cs  # JSON Parsing for AI responses
 
-- Install [UniTask](https://github.com/Cysharp/UniTask) and [NuGetForUnity](https://github.com/GlitchEnzo/NuGetForUnity) via PackageManager.
-- Install LLAMASharp via NuGetForUnity.
-- Manually download one of the LLAMASharp.Backend.xx NuGet packages (LLamaSharp and Backend versions must match exactly!)
-  - [CPU](https://www.nuget.org/packages/LLamaSharp.Backend.Cpu)
-  - [CUDA 11](https://www.nuget.org/packages/LLamaSharp.Backend.Cuda11)
-  - [CUDA 12](https://www.nuget.org/packages/LLamaSharp.Backend.Cuda12)
-- Unpack using ZIP, move `runtimes/<your runtime>/libllama.dll` to your Unity project Assets.
-  (Note: dll must be called `libllama.dll` to be found. If it's named `llama.dll` - rename it when adding to the Unity project.)
-- Move the model to the StreamingAssets folder
-- Move `LLamaSharpBuildPostprocessor` into your project, or write your own for targets other than windows (see `Build and distribution`).
-- Download CUDA Runtime dlls and add them to your project to be able to run the build on systems w/o CUDA installed. 
-For Windows-x64 target you can download them from llama.cpp releases [here](https://github.com/ggerganov/llama.cpp/releases), you need files named cudart-llama-bin-win-cu#.#.#-x64.zip where #.#.# is your LLamaSharp backend's CUDA version.
-- Make sure that your LLAMASharp library and backend are of the same version. Same with CUDA version of LLAMASharp.Backend.CUDA and your installed CUDA (or CUDA RT).
+/Assets/StreamingAssets/LLM/
+  ├── llama-2-7b-chat.Q4_K_M.gguf  # AI Model
+```
 
-At this point you should be able to copy example from this project and run it in yours.
+---
 
-## Build and distribution
+## 🏆 Roadmap
+🔜 **Voice Input Support** 🎙️  
+🔜 **Multimodal AI (Images + Text)** 🖼️  
+🔜 **More Custom Unity Commands** 🎮  
 
-There is some issue with LLamaSharp finding `libllama.dll` in build's plugin directory.
-As a quick workaround there is `LLamaSharpBuildPostprocessor` that copies libllama.dll into the same directory as the `.exe`.
-It only supports windows build target but you can adapt it to work with other targets, or just resolve this manually each build.
+---
 
-## Projects using LLamaSharp in Unity
+## 🎉 Contributing
+1. **Fork the repository**.
+2. **Create a new feature branch** (`git checkout -b my-feature`).
+3. **Commit your changes** (`git commit -m "Added new feature"`).
+4. **Push to GitHub** (`git push origin my-feature`).
+5. **Create a Pull Request**.
 
-If you have a project using LLamaSharp together with Unity and want it to appear here, please create an issue and I will add it!
+---
+
+## 🛠️ License
+📜 MIT License – Free for commercial & personal use.
+
+---
+
+## 🔥 Join the Community
+💬 Discord: [Join Here](https://discord.gg/example)  
+🐦 Twitter: [@ScenePilotAI](https://twitter.com/ScenePilotAI)  
