@@ -1,4 +1,4 @@
-# 🎮 ScenePilot - AI-Powered Unity Scene Control 🚀
+# ScenePilot - AI-Powered Unity Scene Control
 
 ScenePilot is a Unity-based system that allows developers to control their Unity scenes using **natural language commands** powered by **LLamaSharp (Local LLMs)**. With ScenePilot, you can ask an AI to:
 -  Highlight objects
@@ -6,7 +6,7 @@ ScenePilot is a Unity-based system that allows developers to control their Unity
 -  Control scene objects dynamically
 -  Easily add new AI-driven actions
 
-## 🌟 Features
+## Features
  - **Local AI (LLamaSharp)** – No external API required  
  - **Fast LLM Inference with CUDA GPU Acceleration**  
  - **Customizable AI Commands** – Expandable for more Unity actions  
@@ -14,7 +14,7 @@ ScenePilot is a Unity-based system that allows developers to control their Unity
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### 1️⃣ Clone the Repo
 ```sh
@@ -41,7 +41,7 @@ Get models from **[Hugging Face](https://huggingface.co/TheBloke/Llama-2-7B-GGUF
    ```
    Show me the sphere
    ```
-   And the AI will automatically control the scene!
+   And the scene should change accordingly. In this current implementation, the camera should move to focus on the object named "sphere" and change its material to an emissive yellow.
 
 ---
 
@@ -54,18 +54,22 @@ Get models from **[Hugging Face](https://huggingface.co/TheBloke/Llama-2-7B-GGUF
 ---
 
 
-## 🏆 Roadmap
+## Roadmap
 
-🔜 **Voice Input Support**   
-🔜 **Multimodal AI (Images + Text)**   
-🔜 **More Custom Unity Commands**   
+ **Improve how objects are stored and located by command parser**
+ **More Custom Unity Commands**
+ **Voice Input Support**   
+ **Multimodal AI (Images + Text)**   
+ 
+The idea is to generalize this such that the user can define their own commands and what happens when those commands are executed without having to code those changes.
+Once I reach a point that I like, I will make this a package.
 
 ---
 
-## 🎉 Contributing
- Feel free to contribute to this however you like.
+## Contributing
+ Feel free to contribute to this however you like. This is still a very early version.
 
 ---
 
-## 🛠️ License
+## License
 📜 MIT License – Free for commercial & personal use.
