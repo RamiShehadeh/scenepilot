@@ -45,7 +45,7 @@ Get models from **[Hugging Face](https://huggingface.co/TheBloke/Llama-2-7B-GGUF
 
 ---
 
-## ⚙️ How It Works
+## How It Works
 
 - The **UI** collects user input.
 - The **LLMManager** processes the prompt using a **local LLM**.
